@@ -1,5 +1,6 @@
 # Kappa-BibliotecaVirtual
 Proyecto de estructura de datos sección 01, Bliblioteca Virtual
+La Biblioteca Virtual permitirá gestionar libros digitales, usuarios, préstamos, devoluciones y búsquedas de información. El sistema facilitará la administración del catálogo y el acceso eficiente a los recursos bibliográficos.
 
 # Integrantes:
   Jessica Jiménez
