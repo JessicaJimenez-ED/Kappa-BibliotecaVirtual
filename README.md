@@ -17,3 +17,26 @@ La Biblioteca Virtual permitirá gestionar libros digitales, usuarios, préstamo
 
   Cleyrton Bermúdez
   C.I: 32013719
+
+- **Lenguaje:** Python 3.8+
+- **Testing:** unittest (biblioteca estándar)
+- **Control de versiones:** Git
+- **Repositorio:** GitHub
+
+## Sprint 2 - Pilas y Colas
+### Estructuras Implementadas (/structures)
+- **Pila (Stack):** Utilizada para historial de acciones del usuario
+  - Operaciones: push, pop, peek, is_empty, size
+  - Complejidad: O(1) para todas las operaciones básicas
+  
+- **Cola (Queue):** Utilizada para gestión de reservas
+  - Operaciones: enqueue, dequeue, front, is_empty, size
+  - Complejidad: O(1) para todas las operaciones básicas
+
+### Servicios (/services)
+  HistorialService: Maneja el historial de acciones (Pila)
+  ReservaService: Gestiona reservas de libros (Cola)
+
+### Modelos (/models)
+  Añadido libro.py y usuario.py para la representación de modelos de biblioteca virtual
+  según lo estipulado en el plan de implementación del proyecto.
