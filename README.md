@@ -23,7 +23,7 @@ La Biblioteca Virtual permitirá gestionar libros digitales, usuarios, préstamo
 - **Control de versiones:** Git
 - **Repositorio:** GitHub
 
-## Sprint 2 - Pilas y Colas
+## Sprint 3 - Listas Enlazadas (agrega información/descripción sobre el sprint 3 a lo anterior)
 ### Estructuras Implementadas (/structures)
 - **Pila (Stack):** Utilizada para historial de acciones del usuario
   - Operaciones: push, pop, peek, is_empty, size
@@ -33,9 +33,14 @@ La Biblioteca Virtual permitirá gestionar libros digitales, usuarios, préstamo
   - Operaciones: enqueue, dequeue, front, is_empty, size
   - Complejidad: O(1) para todas las operaciones básicas
 
+- **Lista Enlazada:**
+  - Operaciones: inserción, eliminación y recorrido de elementos de la lista
+
 ### Servicios (/services)
   HistorialService: Maneja el historial de acciones (Pila)
   ReservaService: Gestiona reservas de libros (Cola)
+  CatalogoService: Maneja la gestión de catálogos (Listas enlazadas)
+
 
 ### Modelos (/models)
   Añadido libro.py y usuario.py para la representación de modelos de biblioteca virtual
