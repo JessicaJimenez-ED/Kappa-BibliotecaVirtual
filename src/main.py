@@ -1,14 +1,18 @@
 """
-Sprint 2 - Pilas y Colas
+Sprint 3 - Listas Enlazadas y Catálogo de Libros
+Este módulo contiene la función principal que demuestra el uso de las estructuras de datos Pila, Cola
 Demostración de las estructuras implementadas en el contexto de la biblioteca virtual.
+A esta demostración se le agregan las funcionalidades de búsqueda y recorrido del catálogo de libros.
 """
 
-from src.structures.pila import Pila
-from src.structures.cola import Cola
-from src.models.libro import Libro
-from src.models.usuario import Usuario
-from src.services.historial_service import HistorialService
-from src.services.reserva_service import ReservaService
+from src.structures.pila import Pila # Llamando a la clase Pila desde el módulo pila.py
+from src.structures.cola import Cola # Llamando a la clase Cola desde el módulo cola.py
+from src.models.libro import Libro # Llamando a la clase Libro desde el módulo libro.py
+from src.models.usuario import Usuario # Llamando a la clase Usuario desde el módulo usuario.py
+from src.services.historial_service import HistorialService # Llamando a la clase HistorialService desde el módulo historial_service.py
+from src.services.reserva_service import ReservaService # Llamando a la clase ReservaService desde el módulo reserva_service.py
+from src.services.catalogo_service import CatalogoService # Llamando a la clase CatalogoService desde el módulo catalogo_service.py
+from src.structures.listaEnlazada import ListaEnlazada # Llamando a la clase ListaEnlazada desde el módulo lista_enlazada.py
 
 
 def demostrar_pila():
@@ -112,19 +116,127 @@ def demostrar_servicios():
     reservas.mostrar_reservas()
 
 
+def demostrar_lista_enlazada():
+    """
+    Demostración de la Lista Doblemente Enlazada
+    
+    COMPLEJIDAD DE LAS OPERACIONES:
+    - Agregar libro: O(1) - Inserción al final
+    - Buscar por título: O(n) - Búsqueda secuencial
+    - Buscar por autor: O(n) - Búsqueda secuencial
+    - Buscar por ISBN: O(n) - Búsqueda secuencial
+    - Eliminar libro: O(n) - Búsqueda + eliminación
+    - Recorrer catálogo: O(n) - Recorrido completo
+    
+    NOTA: No soporta búsqueda binaria porque es una lista enlazada,
+    no un arreglo ordenado.
+    """
+    print("\n" + "="*60)
+    print("DEMOSTRACIÓN DE LISTA ENLAZADA")
+    print("="*60)
+    
+    # Crear lista de números
+    lista = ListaEnlazada()
+    
+    print("\n1. Insertando elementos:")
+    lista.insertar_final(10)
+    lista.insertar_final(20)
+    lista.insertar_final(30)
+    lista.insertar_inicio(5)
+    print(lista)
+    
+    print("\n2. Insertando en posición 2:")
+    lista.insertar_en_posicion(2, 15)
+    print(lista)
+    
+    print("\n3. Eliminando al inicio:")
+    eliminado = lista.eliminar_inicio()
+    print(f"Eliminado: {eliminado}")
+    print(lista)
+    
+    print("\n4. Buscando elemento 15:")
+    posicion = lista.buscar(15)
+    print(f"Posición: {posicion}")
+    
+    print("\n5. Recorrido hacia adelante:")
+    for elemento in lista.recorrer_adelante():
+        print(f"  → {elemento}")
+    
+    print("\n6. Recorrido hacia atrás:")
+    for elemento in lista.recorrer_atras():
+        print(f"  ← {elemento}")
+
+
+def demostrar_catalogo():
+    """Demostración del catálogo de libros"""
+    print("\n" + "="*60)
+    print("Demostración del Catálogo de Libros")
+    print("="*60)
+    
+    catalogo = CatalogoService()
+    
+    # Agregar libros
+    print("\n1. Agregando libros al catálogo:")
+    libro1 = catalogo.agregar_libro("Cien años de soledad", "Gabriel García Márquez", 1967)
+    libro2 = catalogo.agregar_libro("El amor en los tiempos del cólera", "Gabriel García Márquez", 1985)
+    libro3 = catalogo.agregar_libro("Don Quijote", "Miguel de Cervantes", 1605)
+    libro4 = catalogo.agregar_libro("El principito", "Antoine de Saint-Exupéry", 1943)
+    libro5 = catalogo.agregar_libro("1984", "George Orwell", 1949)
+    
+    print(f"Agregados {catalogo.cantidad_libros()} libros")
+    
+    # Mostrar catálogo
+    catalogo.mostrar_catalogo()
+    
+    # Buscar por título
+    print("\n2. Buscando libros con 'amor' en el título:")
+    resultados = catalogo.buscar_por_titulo("amor")
+    for libro in resultados:
+        print(f"  📖 {libro.titulo} - {libro.autor}")
+    
+    # Buscar por autor
+    print("\n3. Buscando libros de Gabriel García Márquez:")
+    resultados = catalogo.buscar_por_autor("Gabriel García Márquez")
+    for libro in resultados:
+        print(f"  📖 {libro.titulo} ({libro.anio})")
+    
+    # Buscar por ISBN
+    print("\n4. Buscando libro por ISBN:")
+    isbn_buscar = libro3.isbn
+    libro_encontrado = catalogo.buscar_por_isbn(isbn_buscar)
+    if libro_encontrado:
+        print(f"Libro Encontrado: {libro_encontrado}")
+    
+    # Eliminar un libro
+    print(f"\n5. Eliminando libro: {libro2.titulo}")
+    eliminado = catalogo.eliminar_libro(libro2.isbn)
+    if eliminado:
+        print(f"Libro Eliminado: {eliminado.titulo}")
+    
+    # Mostrar catálogo actualizado
+    catalogo.mostrar_catalogo()
+    
+    # Recorrido inverso
+    print("\n6. Recorrido inverso del catálogo (último → primero):")
+    for libro in catalogo.recorrer_inverso():
+        print(f"{libro.titulo}")
+
+
 def main():
     """Función principal que ejecuta todas las demostraciones"""
-    print("="*50)
-    print("SPRINT 2 - PILAS Y COLAS")
-    print("Biblioteca Virtual - Demostración")
-    print("="*50)
+    print("="*60)
+    print("  BIBLIOTECA VIRTUAL - SPRINT 3")
+    print("  Pilas | Colas | Listas Enlazadas")
+    print("="*60)
     
-    demostrar_pila()
-    demostrar_cola()
-    demostrar_servicios()
+    demostrar_pila() # Función que demuestra el funcionamiento de la Pila
+    demostrar_cola() # Función que demuestra el funcionamiento de la Cola
+    demostrar_servicios() # Función que demuestra los servicios de Historial y Reservas
+    demostrar_lista_enlazada() # Función que demuestra la Lista Doblemente Enlazada
+    demostrar_catalogo() # Función que demuestra el Catálogo de Libros con búsqueda y recorrido
     
     print("\n" + "="*50)
-    print("FIN DE DEMOSTRACIÓN")
+    print("Fin de la demostración.")
     print("="*50)
 
 
