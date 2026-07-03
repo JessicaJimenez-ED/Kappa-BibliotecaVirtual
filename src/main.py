@@ -1,19 +1,28 @@
 """
-Sprint 3 - Listas Enlazadas y Catálogo de Libros
-Este módulo contiene la función principal que demuestra el uso de las estructuras de datos Pila, Cola
-Demostración de las estructuras implementadas en el contexto de la biblioteca virtual.
-A esta demostración se le agregan las funcionalidades de búsqueda y recorrido del catálogo de libros.
+Sprint 4 - Arboles Binarios y AVL
+Demostracion de busqueda eficiente con arboles en la biblioteca virtual.
+Este modulo integra todas las estructuras implementadas hasta el momento.
+Al sprint anterior a esta demostración, se le agregan las funcionalidades de búsqueda, inserción y eliminación de libros en un catálogo utilizando arboles binarios y AVL.
+El objetivo es mostrar la eficiencia de estas estructuras frente a listas enlazadas para búsquedas y ordenamiento de datos.
 """
 
+# Importaciones de módulos y clases necesarias para la demostración
+# Estructuras de datos
 from src.structures.pila import Pila # Llamando a la clase Pila desde el módulo pila.py
 from src.structures.cola import Cola # Llamando a la clase Cola desde el módulo cola.py
+from src.structures.listaEnlazada import ListaEnlazada # Llamando a la clase ListaEnlazada desde el módulo lista_enlazada.py
+from src.structures.arbolBinario import ArbolBinario # Llamando a la clase ArbolBinario desde el módulo arbol_binario.py
+from src.structures.arbolAVL import ArbolAVL # Llamando a la clase ArbolAVL desde el módulo arbol_avl.py
+
+# Importaciones de modelos
 from src.models.libro import Libro # Llamando a la clase Libro desde el módulo libro.py
 from src.models.usuario import Usuario # Llamando a la clase Usuario desde el módulo usuario.py
+
+# Importaciones de servicios que utilizan las estructuras de datos
 from src.services.historial_service import HistorialService # Llamando a la clase HistorialService desde el módulo historial_service.py
 from src.services.reserva_service import ReservaService # Llamando a la clase ReservaService desde el módulo reserva_service.py
 from src.services.catalogo_service import CatalogoService # Llamando a la clase CatalogoService desde el módulo catalogo_service.py
-from src.structures.listaEnlazada import ListaEnlazada # Llamando a la clase ListaEnlazada desde el módulo lista_enlazada.py
-
+from src.services.busqueda_service import BusquedaService # Llamando a la clase BusquedaService desde el módulo busqueda_service.py
 
 def demostrar_pila():
     """Demostración del funcionamiento de la Pila"""
@@ -221,6 +230,138 @@ def demostrar_catalogo():
     for libro in catalogo.recorrer_inverso():
         print(f"{libro.titulo}")
 
+def demostrar_arbol_binario():
+    """Demostracion del Arbol Binario de Busqueda"""
+    print("\n" + "="*60)
+    print("DEMOSTRACION DE ARBOL BINARIO DE BUSQUEDA")
+    print("="*60)
+    
+    arbol = ArbolBinario()
+    
+    # Insertar elementos
+    print("\n1. Insertando elementos:")
+    datos = [50, 30, 70, 20, 40, 60, 80]
+    for dato in datos:
+        arbol.insertar(dato)
+    print(f"Arbol: {arbol}")
+    print(f"Tamano: {len(arbol)}")
+    print(f"Altura: {arbol.altura()}")
+    
+    # Buscar elementos
+    print("\n2. Buscando elementos:")
+    print(f"Buscar 40: {arbol.buscar(40)}")
+    print(f"Buscar 99: {arbol.buscar(99)}")
+    
+    # Recorridos
+    print("\n3. Recorridos:")
+    print(f"Inorden (ordenado): {list(arbol.recorrer_inorden())}")
+    print(f"Preorden: {list(arbol.recorrer_preorden())}")
+    print(f"Postorden: {list(arbol.recorrer_postorden())}")
+    print(f"Por niveles: {list(arbol.recorrer_por_niveles())}")
+    
+    # Eliminar elementos
+    print("\n4. Eliminando elemento 30:")
+    arbol.eliminar(30)
+    print(f"Arbol despues de eliminar 30: {arbol}")
+    print(f"Nuevo tamano: {len(arbol)}")
+
+
+def demostrar_arbol_avl():
+    """Demostracion del Arbol AVL (auto-balanceado)"""
+    print("\n" + "="*60)
+    print("DEMOSTRACION DE ARBOL AVL")
+    print("="*60)
+    
+    arbol_avl = ArbolAVL()
+    arbol_abb = ArbolBinario()
+    
+    # Comparativa con datos ordenados (peor caso para ABB)
+    print("\n1. Comparativa con datos ordenados:")
+    print("Insertando 1, 2, 3, 4, 5, 6, 7, 8, 9, 10")
+    
+    for i in range(1, 11):
+        arbol_avl.insertar(i)
+        arbol_abb.insertar(i)
+    
+    print(f"Altura ABB: {arbol_abb.altura()} (puede degenerar)")
+    print(f"Altura AVL: {arbol_avl.altura()} (siempre balanceado)")
+    
+    print("\n2. Recorrido inorden de AVL (ordenado):")
+    print(list(arbol_avl.recorrer_inorden()))
+    
+    # Demostrar balanceo
+    print("\n3. Insertando elementos en diferentes ordenes:")
+    arbol2 = ArbolAVL()
+    
+    # Insercion que causa rotacion
+    arbol2.insertar(30)
+    arbol2.insertar(20)
+    arbol2.insertar(10)  # Esta insercion causa rotacion derecha
+    
+    print(f"Arbol despues de insertar 30, 20, 10:")
+    print(f"Elementos: {arbol2.to_list()}")
+    print(f"Altura: {arbol2.altura()}")
+    
+    # Buscar elementos
+    print("\n4. Busqueda en AVL:")
+    print(f"Buscar 20: {arbol2.buscar(20)}")
+    print(f"Buscar 99: {arbol2.buscar(99)}")
+
+
+def demostrar_busqueda_service():
+    """Demostracion del servicio de busqueda con arboles"""
+    print("\n" + "="*60)
+    print("DEMOSTRACION DEL SERVICIO DE BUSQUEDA")
+    print("="*60)
+    
+    busqueda = BusquedaService()
+    
+    # Crear libros de ejemplo
+    libros = [
+        Libro("ISBN-001", "Cien anos de soledad", "Gabriel Garcia Marquez", 1967),
+        Libro("ISBN-002", "El amor en los tiempos del colera", "Gabriel Garcia Marquez", 1985),
+        Libro("ISBN-003", "Don Quijote", "Miguel de Cervantes", 1605),
+        Libro("ISBN-004", "El principito", "Antoine de Saint-Exupery", 1943),
+        Libro("ISBN-005", "1984", "George Orwell", 1949),
+        Libro("ISBN-006", "Fahrenheit 451", "Ray Bradbury", 1953),
+    ]
+    
+    # Agregar libros al servicio de busqueda
+    print("\n1. Agregando libros al indice:")
+    for libro in libros:
+        busqueda.agregar_libro(libro)
+    print(f"Total de libros: {busqueda.cantidad_libros()}")
+    
+    # Buscar por ISBN
+    print("\n2. Busqueda por ISBN:")
+    libro = busqueda.buscar_por_isbn("ISBN-003")
+    print(f"ISBN-003: {libro.titulo if libro else 'No encontrado'}")
+    
+    # Buscar por titulo
+    print("\n3. Busqueda por titulo:")
+    libro = busqueda.buscar_por_titulo("El principito")
+    print(f"'El principito': {libro.autor if libro else 'No encontrado'}")
+    
+    # Buscar por autor
+    print("\n4. Busqueda por autor:")
+    libros_garcia = busqueda.buscar_por_autor("Gabriel Garcia Marquez")
+    print(f"Libros de Gabriel Garcia Marquez: {len(libros_garcia)}")
+    for l in libros_garcia:
+        print(f"  - {l.titulo} ({l.anio})")
+    
+    # Listar todos los titulos ordenados
+    print("\n5. Todos los titulos en orden alfabetico:")
+    titulos = busqueda.listar_por_titulo()
+    for titulo in titulos:
+        print(f"  - {titulo}")
+    
+    # Estadisticas de los arboles
+    print("\n6. Estadisticas de los indices:")
+    stats = busqueda.estadisticas()
+    print(f"Total de libros: {stats['total_libros']}")
+    print(f"Indice ISBN: tamano={stats['indice_isbn']['tamano']}, altura={stats['indice_isbn']['altura']}")
+    print(f"Indice Titulo: tamano={stats['indice_titulo']['tamano']}, altura={stats['indice_titulo']['altura']}")
+    print(f"Indice Autor: tamano={stats['indice_autor']['tamano']}, altura={stats['indice_autor']['altura']}")
 
 def main():
     """Función principal que ejecuta todas las demostraciones"""
@@ -234,6 +375,9 @@ def main():
     demostrar_servicios() # Función que demuestra los servicios de Historial y Reservas
     demostrar_lista_enlazada() # Función que demuestra la Lista Doblemente Enlazada
     demostrar_catalogo() # Función que demuestra el Catálogo de Libros con búsqueda y recorrido
+    demostrar_arbol_binario()
+    demostrar_arbol_avl()
+    demostrar_busqueda_service()
     
     print("\n" + "="*50)
     print("Fin de la demostración.")

@@ -101,7 +101,7 @@ class Pila:
         
         Complejidad: O(1) - Reinicia la lista
         """
-        self._items.clear()
+        self.items.clear()
         self._size = 0
     
     def to_list(self) -> List[Any]:
