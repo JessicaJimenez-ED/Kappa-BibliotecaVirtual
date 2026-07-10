@@ -19,29 +19,30 @@ La Biblioteca Virtual permitirá gestionar libros digitales, usuarios, préstamo
   C.I: 32013719
 
 - **Lenguaje:** Python 3.8+
-- **Testing:** unittest (biblioteca estándar)
 - **Control de versiones:** Git
 - **Repositorio:** GitHub
 
-## Sprint 3 - Listas Enlazadas (agrega información/descripción sobre el sprint 3 a lo anterior)
-### Estructuras Implementadas (/structures)
-- **Pila (Stack):** Utilizada para historial de acciones del usuario
-  - Operaciones: push, pop, peek, is_empty, size
-  - Complejidad: O(1) para todas las operaciones básicas
-  
-- **Cola (Queue):** Utilizada para gestión de reservas
-  - Operaciones: enqueue, dequeue, front, is_empty, size
-  - Complejidad: O(1) para todas las operaciones básicas
+### Sprint 2 - Pilas y Colas
+- **Pila (Stack):** Historial de acciones del usuario (LIFO)
+- **Cola (Queue):** Reservas de libros (FIFO)
 
-- **Lista Enlazada:**
-  - Operaciones: inserción, eliminación y recorrido de elementos de la lista
+### Sprint 3 - Listas Enlazadas
+- **Lista Doblemente Enlazada:** Catálogo de libros
+- Inserción, eliminación, búsqueda y recorridos
 
-### Servicios (/services)
-  HistorialService: Maneja el historial de acciones (Pila)
-  ReservaService: Gestiona reservas de libros (Cola)
-  CatalogoService: Maneja la gestión de catálogos (Listas enlazadas)
+### Sprint 4 - Árboles Binarios y AVL
+- **ABB:** Búsqueda rápida (O(log n) promedio)
+- **AVL:** Búsqueda rápida garantizada (O(log n) siempre)
 
+### Sprint 5 - Árboles 2-3 y B
+- **Árbol 2-3:** Índice balanceado para búsquedas eficientes
+- **Árbol B (opcional):** Índice para grandes volúmenes de datos
 
-### Modelos (/models)
-  Añadido libro.py y usuario.py para la representación de modelos de biblioteca virtual
-  según lo estipulado en el plan de implementación del proyecto.
+| Estructura | Búsqueda | Inserción | Uso en el Proyecto |
+|------------|----------|-----------|-------------------|
+| Pila | O(1) | O(1) | Historial de acciones |
+| Cola | O(1) | O(1) | Reservas de libros |
+| Lista Enlazada | O(n) | O(1) | Catálogo general |
+| ABB | O(log n)* | O(log n)* | Búsqueda simple |
+| AVL | O(log n) | O(log n) | Búsqueda rápida |
+| Árbol 2-3 | O(log n) | O(log n) | Índice eficiente |

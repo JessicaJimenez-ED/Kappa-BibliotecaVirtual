@@ -1,9 +1,7 @@
 """
-Sprint 4 - Arboles Binarios y AVL
-Demostracion de busqueda eficiente con arboles en la biblioteca virtual.
+Sprint 5 - Árboles 2-3 y Árbol B
+Demostracion de operaciones con árboles en la biblioteca virtual.
 Este modulo integra todas las estructuras implementadas hasta el momento.
-Al sprint anterior a esta demostración, se le agregan las funcionalidades de búsqueda, inserción y eliminación de libros en un catálogo utilizando arboles binarios y AVL.
-El objetivo es mostrar la eficiencia de estas estructuras frente a listas enlazadas para búsquedas y ordenamiento de datos.
 """
 
 # Importaciones de módulos y clases necesarias para la demostración
@@ -13,6 +11,7 @@ from src.structures.cola import Cola # Llamando a la clase Cola desde el módulo
 from src.structures.listaEnlazada import ListaEnlazada # Llamando a la clase ListaEnlazada desde el módulo lista_enlazada.py
 from src.structures.arbolBinario import ArbolBinario # Llamando a la clase ArbolBinario desde el módulo arbol_binario.py
 from src.structures.arbolAVL import ArbolAVL # Llamando a la clase ArbolAVL desde el módulo arbol_avl.py
+from src.structures.arbol23 import Arbol23 # Llamando a la clase Arbol23 desde el módulo arbol23.py
 
 # Importaciones de modelos
 from src.models.libro import Libro # Llamando a la clase Libro desde el módulo libro.py
@@ -23,6 +22,7 @@ from src.services.historial_service import HistorialService # Llamando a la clas
 from src.services.reserva_service import ReservaService # Llamando a la clase ReservaService desde el módulo reserva_service.py
 from src.services.catalogo_service import CatalogoService # Llamando a la clase CatalogoService desde el módulo catalogo_service.py
 from src.services.busqueda_service import BusquedaService # Llamando a la clase BusquedaService desde el módulo busqueda_service.py
+from src.services.indice_service import IndiceService # Llamando a la clase IndiceService desde el módulo indice_service.py
 
 def demostrar_pila():
     """Demostración del funcionamiento de la Pila"""
@@ -363,22 +363,104 @@ def demostrar_busqueda_service():
     print(f"Indice Titulo: tamano={stats['indice_titulo']['tamano']}, altura={stats['indice_titulo']['altura']}")
     print(f"Indice Autor: tamano={stats['indice_autor']['tamano']}, altura={stats['indice_autor']['altura']}")
 
+def demostrar_arbol23():
+    """Demostracion del Arbol 2-3 (Sprint 5)"""
+    print("\n" + "="*60)
+    print("DEMOSTRACION DE ARBOL 2-3")
+    print("="*60)
+    
+    print("\n1. Insertando elementos:")
+    arbol = Arbol23()
+    
+    # Insertar elementos en orden (peor caso para ABB, ideal para 2-3)
+    elementos = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    for elem in elementos:
+        arbol.insertar(elem)
+        print(f"  Insertado {elem}: altura={arbol.altura()}, elementos={len(arbol)}")
+    
+    print(f"\n2. Estado final del arbol:")
+    print(f"  Elementos: {len(arbol)}")
+    print(f"  Altura: {arbol.altura()} (siempre balanceado)")
+    print(f"  Recorrido inorden: {arbol.to_list()[:10]}...")
+    
+    print("\n3. Busqueda en Arbol 2-3 (O(log n)):")
+    print(f"  Buscar 50: {'Encontrado' if 50 in arbol else 'No encontrado'}")
+    print(f"  Buscar 99: {'Encontrado' if 99 in arbol else 'No encontrado'}")
+    
+
+def demostrar_indice_service():
+    """Demostracion del servicio de indice con Arbol 2-3 (Sprint 5)"""
+    print("\n" + "="*60)
+    print("DEMOSTRACION DEL INDICE CON ARBOL 2-3")
+    print("="*60)
+    
+    indice = IndiceService()
+    
+    # Crear libros de ejemplo
+    libros = [
+        Libro("978-9582813758", "La culpa es de la vaca", "Jaime López Gutiérrez", 2002),
+        Libro("978-8432036262", "Cosmos", "Carl Sagan", 1982),
+        Libro("978-0-201-61622-4", "Doña Bárbara", "Rómulo Gallegos", 1929),
+        Libro("978-980-15-0498-6", "Guía Caracol Integral 5° Edición Docente", "Santillana", 2011),
+        Libro("978-8498382662", "Harry Potter y la piedra filosofal", "J.K. Rowling", 1998),
+        Libro("978-84-450-1958-0", "El Señor de los Anillos", "J. R. R. Tolkien", 1977),
+    ]
+    
+    print("\n1. Agregando libros al indice:")
+    for libro in libros:
+        indice.agregar_libro(libro)
+        print(f"  Agregado: {libro.titulo}")
+    
+    print(f"\n2. Total de libros: {indice.cantidad_libros()}")
+    
+    print("\n3. Busqueda por ISBN (O(log n)):")
+    isbn_buscar = "978-0-13-235088-4"
+    libro = indice.buscar_por_isbn(isbn_buscar)
+    if libro:
+        print(f"  Encontrado: {libro.titulo} por {libro.autor}")
+    
+    print("\n4. Busqueda por titulo exacto (O(log n)):")
+    libro = indice.buscar_por_titulo("Clean Code")
+    if libro:
+        print(f"  Encontrado: {libro.titulo} (ISBN: {libro.isbn})")
+    
+    print("\n5. Busqueda por autor (O(log n)):")
+    libros_autor = indice.buscar_por_autor("Eric Matthes")
+    for l in libros_autor:
+        print(f"  - {l.titulo} ({l.anio})")
+    
+    print("\n6. Estadisticas del indice:")
+    stats = indice.estadisticas()
+    print(f"  Total libros: {stats['total_libros']}")
+    print(f"  ISBN index: {stats['indice_isbn']['tamano']} elementos, altura {stats['indice_isbn']['altura']}")
+    print(f"  Titulo index: {stats['indice_titulo']['tamano']} elementos, altura {stats['indice_titulo']['altura']}")
+    print(f"  Autor index: {stats['indice_autor']['tamano']} elementos, altura {stats['indice_autor']['altura']}")
+
 def main():
     """Función principal que ejecuta todas las demostraciones"""
     print("="*60)
-    print("  BIBLIOTECA VIRTUAL - SPRINT 3")
-    print("  Pilas | Colas | Listas Enlazadas")
+    print("Biblioteca virtual - Sprint 5")
+    print("  Pilas | Colas | Listas Enlazadas | Árboles Binarios | AVL | Árbol 2-3")
     print("="*60)
     
-    demostrar_pila() # Función que demuestra el funcionamiento de la Pila
-    demostrar_cola() # Función que demuestra el funcionamiento de la Cola
-    demostrar_servicios() # Función que demuestra los servicios de Historial y Reservas
-    demostrar_lista_enlazada() # Función que demuestra la Lista Doblemente Enlazada
-    demostrar_catalogo() # Función que demuestra el Catálogo de Libros con búsqueda y recorrido
+# Sprint 2 - Pilas y Colas
+    demostrar_pila()
+    demostrar_cola()
+    demostrar_servicios()
+    
+    # Sprint 3 - Listas Enlazadas
+    demostrar_lista_enlazada()
+    demostrar_catalogo()
+    
+    # Sprint 4 - Arboles Binarios y AVL
     demostrar_arbol_binario()
-    demostrar_arbol_avl()
     demostrar_busqueda_service()
     
+    # Sprint 5 - Arbol 2-3
+    demostrar_arbol23()
+    demostrar_indice_service()
+    
+        
     print("\n" + "="*50)
     print("Fin de la demostración.")
     print("="*50)
