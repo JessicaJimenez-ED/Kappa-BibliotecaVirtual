@@ -38,11 +38,6 @@ La Biblioteca Virtual permitirá gestionar libros digitales, usuarios, préstamo
 - **Árbol 2-3:** Índice balanceado para búsquedas eficientes
 - **Árbol B (opcional):** Índice para grandes volúmenes de datos
 
-| Estructura | Búsqueda | Inserción | Uso en el Proyecto |
-|------------|----------|-----------|-------------------|
-| Pila | O(1) | O(1) | Historial de acciones |
-| Cola | O(1) | O(1) | Reservas de libros |
-| Lista Enlazada | O(n) | O(1) | Catálogo general |
-| ABB | O(log n)* | O(log n)* | Búsqueda simple |
-| AVL | O(log n) | O(log n) | Búsqueda rápida |
-| Árbol 2-3 | O(log n) | O(log n) | Índice eficiente |
+### Sprint 6 - Grafos y Hashing
+- **Grafos:** Utilizado funciones para recomendar libros 
+- **Hashing:** Utilizado para manejo de colisiones
