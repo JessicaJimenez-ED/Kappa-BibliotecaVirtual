@@ -9,8 +9,8 @@ El catálogo es dinámico y permite:
 - Recorrer todos los libros
 """
 
-from src.structures.listaEnlazada import ListaEnlazada
-from src.models.libro import Libro
+from structures.listaEnlazada import ListaEnlazada
+from models.libro import Libro
 from typing import Optional, List, Iterator
 
 class CatalogoService:

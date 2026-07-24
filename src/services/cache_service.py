@@ -8,8 +8,8 @@ Uso en el proyecto:
 - Almacenamiento temporal de usuarios activos
 """
 
-from src.structures.tablaHash import TablaHash
-from src.models.libro import Libro
+from structures.tablaHash import TablaHash
+from models.libro import Libro
 from typing import Optional, List
 
 

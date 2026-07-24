@@ -11,8 +11,8 @@ Comparativa:
 - Arbol 2-3: Busqueda O(log n) garantizado, siempre balanceado
 """
 
-from src.structures.arbol23 import Arbol23
-from src.models.libro import Libro
+from structures.arbol23 import Arbol23
+from models.libro import Libro
 from typing import Optional, List, Dict
 
 class IndiceService:
@@ -74,6 +74,30 @@ class IndiceService:
         
         # Guardar el libro en el diccionario
         self._libros[libro.isbn] = libro
+        
+        return True
+    
+    def eliminar_libro(self, isbn: str) -> bool:
+        """
+        Elimina un libro de los índices.
+        
+        NOTA IMPORTANTE: El Árbol 2-3 no implementa eliminación
+        (documentado en la limitación del Sprint 5).
+        Por lo tanto, solo se elimina del diccionario de libros.
+        
+        Args:
+            isbn: ISBN del libro a eliminar
+        
+        Returns:
+            True si se eliminó correctamente, False si no existía
+        
+        Limitación: El Árbol 2-3 no implementa eliminación.
+        """
+        if isbn not in self._libros:
+            return False
+        
+        # Eliminar del diccionario
+        del self._libros[isbn]
         
         return True
     

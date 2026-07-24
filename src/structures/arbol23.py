@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 Módulo: Arbol 2-3
 Sprint 5 - Estructuras de datos: árboles 2-3
@@ -25,7 +26,6 @@ Limitaciones:
 """
 
 from typing import Optional, List, TypeVar, Generic, Iterator
-from __future__ import annotations
 
 T = TypeVar('T')
 

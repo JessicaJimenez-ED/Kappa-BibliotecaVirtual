@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 Módulo: Lista Doblemente Enlazada
 Implementación desde cero para el proyecto de biblioteca virtual.
@@ -23,9 +24,7 @@ Complejidades:
 Limitaciones:
 - No soporta búsqueda binaria porque no es un arreglo ordenado
 """
-
 from typing import Any, Optional, TypeVar, Generic, Iterator
-from __future__ import annotations
 
 T = TypeVar('T')  # Tipo genérico para la lista
 

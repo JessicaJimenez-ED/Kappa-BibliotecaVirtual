@@ -1,3 +1,4 @@
+from __future__ import annotations # Permite usar anotaciones de tipo de manera más flexible, especialmente para referencias a la propia clase
 """
 Módulo: Arbol Binario de Búsqueda (ABB)
 Sprint 4 - Estructuras de datos: Arboles Binarios
@@ -22,7 +23,6 @@ Limitaciones:
 """
 
 from typing import Optional, TypeVar, Generic, Iterator, List # Se importan tipos genéricos y utilidades de tipado
-from __future__ import annotations # Permite usar anotaciones de tipo de manera más flexible, especialmente para referencias a la propia clase
 
 T = TypeVar('T') # Tipo genérico para los datos almacenados en el arbol
 

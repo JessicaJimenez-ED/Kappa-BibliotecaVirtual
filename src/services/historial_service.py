@@ -4,7 +4,7 @@ Servicio: Historial
 Utiliza la estructura Pila para gestionar el historial de acciones
 """
 
-from src.structures.pila import Pila
+from structures.pila import Pila
 from typing import List
 
 class HistorialService:

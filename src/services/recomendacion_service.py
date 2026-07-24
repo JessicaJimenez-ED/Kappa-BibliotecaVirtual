@@ -8,8 +8,8 @@ Uso en el proyecto:
 - Encontrar caminos de lectura
 """
 
-from src.structures.grafo import Grafo
-from src.models.libro import Libro
+from structures.grafo import Grafo
+from models.libro import Libro
 from typing import List, Optional, Dict, Set
 
 class RecomendacionService:

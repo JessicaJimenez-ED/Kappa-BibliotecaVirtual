@@ -4,9 +4,9 @@ Servicio: Reservas
 Utiliza la estructura Cola para gestionar reservas en orden de llegada
 """
 
-from src.structures.cola import Cola
-from src.models.libro import Libro
-from src.models.usuario import Usuario
+from structures.cola import Cola
+from models.libro import Libro
+from models.usuario import Usuario
 from typing import Optional, Dict, List
 
 class ReservaService:

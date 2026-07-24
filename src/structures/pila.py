@@ -113,7 +113,7 @@ class Pila:
             
         Complejidad: O(n) - n = tamaño de la pila
         """
-        return self._items.copy()
+        return self.items.copy()
     
     def __str__(self) -> str:
         """
@@ -122,7 +122,7 @@ class Pila:
         Returns:
             String con los elementos de la pila
         """
-        return f"Pila: {self._items}"
+        return f"Pila: {self.items}"
     
     def __len__(self) -> int:
         """

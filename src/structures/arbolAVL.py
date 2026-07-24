@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 Modulo: Árbol AVL
 Sprint 4 - Estructuras de datos: Árbol AVL
@@ -22,7 +23,6 @@ Limitaciónes:
 """
 
 from typing import Optional, TypeVar, Generic, Iterator, List # Se importan tipos para anotaciones de tipo y generics
-from __future__ import annotations
 
 T = TypeVar('T') # Tipo genérico para los datos almacenados en el arbol AVL
 

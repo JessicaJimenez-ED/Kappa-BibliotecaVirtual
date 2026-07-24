@@ -114,7 +114,7 @@ class Cola:
             
         Complejidad: O(n) - n = tamaño de la cola
         """
-        return self._items.copy()
+        return self.items.copy()
 
     def __str__(self) -> str:
         """
@@ -123,7 +123,7 @@ class Cola:
         Returns:
             String con los elementos de la cola
         """
-        return f"Cola: {self._items}"
+        return f"Cola: {self.items}"
     
     def __len__(self) -> int:
         """

@@ -11,9 +11,9 @@ Comparativa:
 - Árbol AVL: búsqueda O(log n) garantizado - siempre rapida
 """
 
-from src.structures.arbolBinario import ArbolBinario
-from src.structures.arbolAVL import ArbolAVL
-from src.models.libro import Libro
+from structures.arbolBinario import ArbolBinario
+from structures.arbolAVL import ArbolAVL
+from models.libro import Libro
 from typing import Optional, List, Dict, Tuple
 
 class BusquedaService:
